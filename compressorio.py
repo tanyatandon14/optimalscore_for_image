@@ -25,7 +25,7 @@ if rad== "Home":
             progress.progress(i+1)
         st.info("optimal score for compression:") 
         
-        st.info(random.randint(40,59))
+        st.info((score.py)) # will return the score from the score.py script of the function 
  
 if rad =="About Us":
       st.heading("ABOUT US ")
