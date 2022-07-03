@@ -8,12 +8,13 @@ import os
 
 # import svm functions (from libsvm library)   
 # if python2.x version : import svm from libsvm (sudo apt-get install python-libsvm)
-if sys.version_info[0] < 3:
-    import svm
-    import svmutil
-    from svmutil import *
-    from svm import *
-else:
+def score:
+ if sys.version_info[0] < 3:
+   	import svm
+   	import svmutil
+   	from svmutil import *
+   	from svm import *
+ else:
     # if python 3.x version 
     # make sure the file is in libsvm/python folder
     import svm
@@ -22,7 +23,7 @@ else:
     from svmutil import *
 
 # AGGD fit model, takes input as the MSCN Image / Pair-wise Product
-def AGGDfit(structdis):
+ def AGGDfit(structdis):
     # variables to count positive pixels / negative pixels and their squared sum
     poscount = 0
     negcount = 0
@@ -65,7 +66,7 @@ def AGGDfit(structdis):
 
     return [lsigma_best, rsigma_best, gamma_best] 
 
-def func(gam, prevgamma, prevdiff, sampling, rhatnorm):
+ def func(gam, prevgamma, prevdiff, sampling, rhatnorm):
     while(gam < 10):
         r_gam = tgamma(2/gam) * tgamma(2/gam) / (tgamma(1/gam) * tgamma(3/gam))
         diff = abs(r_gam - rhatnorm)
@@ -76,7 +77,7 @@ def func(gam, prevgamma, prevdiff, sampling, rhatnorm):
     gamma_best = prevgamma
     return gamma_best
 
-def compute_features(img):
+ def compute_features(img):
     scalenum = 2
     feat = []
     # make a copy of the image 
@@ -144,7 +145,7 @@ def compute_features(img):
 
 # function to calculate BRISQUE quality score 
 # takes input of the image path
-def test_measure_BRISQUE(imgPath):
+ def test_measure_BRISQUE(imgPath):
     # read image from given path
     dis = cv2.imread(imgPath, 1)
     if(dis is None):
@@ -194,7 +195,7 @@ def test_measure_BRISQUE(imgPath):
     return qualityscore
 
 # exit if input argument not given
-if(len(sys.argv) != 2):
+ if(len(sys.argv) != 2):
     print("Please give input argument of the image path.")
     print("Arguments expected: <image_path>")
     print("--------------------------------")
@@ -202,5 +203,5 @@ if(len(sys.argv) != 2):
     sys.exit(0)
 
 # calculate quality score
-qualityscore = test_measure_BRISQUE(sys.argv[1])
-print ("Score of the given image: {}".format(qualityscore)) 
+ qualityscore = test_measure_BRISQUE(sys.argv[1])
+ return (qualityscore) 
